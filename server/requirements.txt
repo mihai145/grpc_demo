@@ -1,0 +1,4 @@
+grpcio==1.47.0
+protobuf==4.21.4
+python-dotenv==0.20.0
+redis==4.3.4

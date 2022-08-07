@@ -1,0 +1,5 @@
+__pycache__
+proto
+Dockerfile
+docker-compose.yaml
+mock_client.py

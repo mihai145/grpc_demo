@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  redis:
+    image: bitnami/redis:7.0.4-debian-11-r9
+    networks:
+      - grpc_server_network
+    environment:
+      - REDIS_PASSWORD=1234
+    volumes:
+      - redis_persistance:/bitnami/redis/data
+    
+  grpc_server:
+    image: grpc_redis_server:1.0.0   # name of the image built from the Dockerfile
+    networks:
+      - grpc_server_network
+    ports:
+      - "50051:50051"
+    environment:                     # server logs to STDOUT
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - redis
+
+networks:
+  grpc_server_network:
+
+volumes:
+  redis_persistance: {}

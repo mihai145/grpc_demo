@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "app/";
+
+message KeyValuePair {
+  string key = 1;
+  string value = 2;
+}
+
+message ListPairs {
+  repeated KeyValuePair pairs = 1;
+}
+
+message StatusResponse {
+  bool ok = 1;
+}
+
+message Empty {
+    
+}
+
+service DictService {
+  rpc AddPair(KeyValuePair) returns (StatusResponse);
+  rpc GetPairs(Empty) returns (ListPairs);
+}

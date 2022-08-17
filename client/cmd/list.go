@@ -4,11 +4,9 @@ import (
 	"context"
 	"fmt"
 	"go_client/app"
-	"log"
+	"go_client/utils"
 
 	"github.com/spf13/cobra"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
 )
 
 func init() {
@@ -20,10 +18,10 @@ var listCmd = &cobra.Command{
 	Short: "Lists all key-value pairs",
 	Long:  "Lists all key-value pairs",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		// Create gRPC connection
-		conn, connErr := grpc.Dial("localhost:50051", grpc.WithTransportCredentials(insecure.NewCredentials()))
+		// Get grpc connection
+		conn, connErr := utils.DialGrpc()
 		if connErr != nil {
-			log.Fatalf("Could not init connection: %v", connErr)
+			return connErr
 		}
 		defer conn.Close()
 
